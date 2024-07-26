@@ -5,24 +5,37 @@
 package com.banckend.curso.entities;
 
 import com.banckend.curso.models.AlumnoRequestModel;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "alumno")
 @SequenceGenerator(name = "alumno_seq", allocationSize = 1 )
+@NamedQueries({
+    @NamedQuery(name = "Alumno.findById", query= "SELECT a FROM Alumno a  WHERE a.id = :id "),
+    @NamedQuery(name = "Alumno.findByCurp", query= "SELECT a FROM Alumno a  WHERE a.curp = :curp ")
+})
 public class Alumno {
     @Id
+    @Column(name= "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "alumno_seq" )
     private Long id;
+    @Column(name= "nombre", length=35, nullable = false )
     private String nombre;
+    @Column(name= "apellido_paterno", length=40, nullable = false )
     private String apellidoPaterno;
+    @Column(name= "apellido_materno", length=40, nullable = false )
     private String apellidoMaterno;
-    private String numeroControl;
+    @Column(name= "numero_control", length=15, nullable = false )
+    private String numeroControl;    
+    @Column(name= "curp", length=20, nullable = false )
     private String curp;
 
     public Alumno() {}
@@ -32,7 +45,7 @@ public class Alumno {
        this.apellidoPaterno = model.getApellidoPaterno();
        this.apellidoMaterno = model.getApellidoMaterno();
        this.curp = model.getCurp();
-       this.numeroControl = model.getNumeroControl();
+       this.numeroControl = model.getNumeroControl() + "3333";
     }
     
     

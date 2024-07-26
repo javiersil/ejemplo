@@ -9,8 +9,10 @@ import com.banckend.curso.repositories.AlumnosRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
@@ -18,9 +20,7 @@ import javax.persistence.Persistence;
  */
 public class AlumnosRepositoryImpl implements AlumnosRepository {
 
-    private final EntityManagerFactory manager;
-    
-    private List<Alumno> alumnos = new ArrayList();
+    private final EntityManagerFactory manager;    
     
     public AlumnosRepositoryImpl(){
         manager = Persistence
@@ -29,33 +29,109 @@ public class AlumnosRepositoryImpl implements AlumnosRepository {
     
     @Override
     public Optional<Alumno> findById(long id) {
-        return alumnos.stream().filter( alumno -> alumno.getId() == id)
-                .findFirst();
+         EntityManager entityManage = null;
+        try {
+            entityManage = manager.createEntityManager();
+            Alumno alumno = entityManage.find(Alumno.class, id);
+            if (alumno != null) {
+             return Optional.of(alumno);
+            }
+            return Optional.empty();
+        } catch(Exception ex) {
+            throw ex;
+        }
+        finally {
+           if( entityManage != null) {
+               entityManage.close();
+           }
+        }
     }
 
     @Override
     public Alumno save(Alumno alumno) {
-        alumno.setId(Long.parseLong((alumnos.size() + 1) + ""));
-        alumnos.add(alumno);
-        return alumno;
+        EntityManager entityManage = null;
+        try {
+            entityManage = manager.createEntityManager();
+            entityManage.getTransaction().begin();
+            entityManage.persist(alumno);
+            entityManage.getTransaction().commit();
+           return alumno;
+        } catch(Exception ex) {
+            if( entityManage != null) {
+               entityManage.getTransaction().rollback();
+            }
+            throw ex;
+        }
+        finally {
+           if( entityManage != null) {
+               entityManage.close();
+           }
+        }
     }
 
     @Override
     public Alumno update(Alumno alumno) {
-        throw new UnsupportedOperationException("Not supported yet."); 
-// Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         EntityManager entityManage = null;
+        try {
+            entityManage = manager.createEntityManager();
+            entityManage.getTransaction().begin();
+            entityManage.merge(alumno);
+            entityManage.getTransaction().commit();
+           return alumno;
+        } catch(Exception ex) {
+            if( entityManage != null) {
+               entityManage.getTransaction().rollback();
+            }
+            throw ex;
+        }
+        finally {
+           if( entityManage != null) {
+               entityManage.close();
+           }
+        }
     }
 
     @Override
     public void delete(Alumno alumno) {
-        throw new UnsupportedOperationException("Not supported yet."); 
-// Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         EntityManager entityManage = null;
+        try {
+            entityManage = manager.createEntityManager();
+            entityManage.getTransaction().begin();
+            entityManage.remove(alumno);
+            entityManage.getTransaction().commit();
+        } catch(Exception ex) {
+            if( entityManage != null) {
+               entityManage.getTransaction().rollback();
+            }
+            throw ex;
+        }
+        finally {
+           if( entityManage != null) {
+               entityManage.close();
+           }
+        }
     }
 
     @Override
     public  Optional<Alumno> findByCurp(String curp) {
-        return alumnos.stream().filter( alumno -> alumno.getCurp().equals(curp))
-                .findFirst();
+         EntityManager entityManage = null;
+        try {
+            entityManage = manager.createEntityManager();
+            Query query = entityManage.createNamedQuery("Alumno.findByCurp", Alumno.class);
+            query.setParameter("curp", curp);
+            if (!query.getResultList().isEmpty()) {                
+              Alumno alumno = (Alumno)query.getResultList().get(0);
+              return Optional.of(alumno);
+            }
+            return Optional.empty();
+        } catch(Exception ex) {
+            throw ex;
+        }
+        finally {
+           if( entityManage != null) {
+               entityManage.close();
+           }
+        }
     }
     
 }

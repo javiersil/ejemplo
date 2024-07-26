@@ -30,10 +30,8 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jLabel1" max="32767" attributes="0"/>
-                              <Component id="jLabel2" pref="116" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="jLabel1" max="32767" attributes="0"/>
+                          <Component id="jLabel2" pref="116" max="32767" attributes="0"/>
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="nombreInput" alignment="0" max="32767" attributes="0"/>
                           <Component id="apellidoPaternoInput" alignment="0" max="32767" attributes="0"/>
@@ -108,7 +106,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Guardar"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
-        <Property name="actionCommand" type="java.lang.String" value="Guardar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarBotonActionPerformed"/>

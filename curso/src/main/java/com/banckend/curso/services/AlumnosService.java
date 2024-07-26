@@ -21,10 +21,12 @@ public class AlumnosService {
        this.repository = new AlumnosRepositoryImpl();
     }
     
-    public Alumno guardar(Alumno alumno) throws Exception {        
+    public Alumno guardar(Alumno alumno) throws Exception {   
+        System.out.println("Que pasa aqui");
         if(repository.findByCurp(alumno.getCurp()).isPresent()) {
           throw new Exception("No puedes guardar un alumno con esa curp");
-        }        
+        }   
+        
        return repository.save(alumno);
     }
     
