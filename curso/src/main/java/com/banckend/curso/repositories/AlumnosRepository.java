@@ -19,11 +19,6 @@ import java.util.Optional;
  * 
  * @author Marcos
  */
-public interface AlumnosRepository {
-    public Optional<Alumno> findById(long id);
-    public Alumno save(Alumno alumno);
-    public Alumno update(Alumno alumno);
-    public void delete(Alumno alumno);
-    
+public interface AlumnosRepository extends CrudRepository<Alumno, Long> {    
     public Optional<Alumno> findByCurp(String curp);
 }

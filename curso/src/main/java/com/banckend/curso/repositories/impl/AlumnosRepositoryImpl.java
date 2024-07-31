@@ -6,8 +6,6 @@ package com.banckend.curso.repositories.impl;
 
 import com.banckend.curso.entities.Alumno;
 import com.banckend.curso.repositories.AlumnosRepository;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -28,7 +26,7 @@ public class AlumnosRepositoryImpl implements AlumnosRepository {
     }
     
     @Override
-    public Optional<Alumno> findById(long id) {
+    public Optional<Alumno> findById(Long id) {
          EntityManager entityManage = null;
         try {
             entityManage = manager.createEntityManager();

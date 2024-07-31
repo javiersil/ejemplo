@@ -3,6 +3,7 @@
   <persistence-unit name="com.banckend_curso_jar_1.0.0PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.banckend.curso.entities.Alumno</class>
+    <class>com.banckend.curso.entities.Profesor</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/curso"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
