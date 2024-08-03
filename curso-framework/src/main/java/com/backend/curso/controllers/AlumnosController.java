@@ -1,11 +1,12 @@
 
 package com.backend.curso.controllers;
 
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,5 +44,16 @@ public class AlumnosController {
     public ResponseEntity<AlumnoResponseModel> guardar(@RequestBody AlumnoRequestModel model) throws Exception {
        return  ResponseEntity.status(201).body(service.guardarModel(model));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<AlumnoResponseModel> editar(@PathVariable("id") long id,
+                                                      @RequestBody AlumnoRequestModel model) throws Exception {
+       return  ResponseEntity.status(200).body(service.guardarModel(model));
+    }
     
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable("id") long id) throws Exception {
+        service.eliminar(id);
+        return  ResponseEntity.ok().build();
+    }
 }

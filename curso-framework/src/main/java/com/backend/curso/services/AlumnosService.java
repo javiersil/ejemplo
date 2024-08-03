@@ -4,6 +4,7 @@
  */
 package com.backend.curso.services;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.backend.curso.entities.Alumno;
@@ -42,5 +43,10 @@ public class AlumnosService {
 
     public AlumnoResponseModel guardarModel(AlumnoRequestModel model) throws Exception {
         return new AlumnoResponseModel(guardar(new Alumno(model)));
+    }
+
+    public void eliminar(long id) throws Exception {
+        Alumno alumno = obtenerPorId(id);
+        repository.delete(alumno);
     }
 }
