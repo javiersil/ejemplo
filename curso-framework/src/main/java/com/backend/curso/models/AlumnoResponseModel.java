@@ -3,10 +3,11 @@ package com.backend.curso.models;
 
 import com.backend.curso.entities.Alumno;
 
-/**
- *
- * @author Marcos
- */
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class AlumnoResponseModel {
     private Long id;
     private String nombre;
@@ -23,30 +24,5 @@ public class AlumnoResponseModel {
          this.curp = alumno.getCurp();
          this.numeroControl = alumno.getNumeroControl();
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellidoPaterno() {
-        return apellidoPaterno;
-    }
-
-    public String getApellidoMaterno() {
-        return apellidoMaterno;
-    }
-
-    public String getNumeroControl() {
-        return numeroControl;
-    }
-
-    public String getCurp() {
-        return curp;
-    }
-
-    
+      
 }

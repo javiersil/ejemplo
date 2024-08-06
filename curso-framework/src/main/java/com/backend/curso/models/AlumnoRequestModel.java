@@ -1,57 +1,24 @@
 package com.backend.curso.models;
 
-/**
- *
- * @author Marcos
- */
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class AlumnoRequestModel {
+    @NotNull(message = "El nombre no puede ser nulo o vacio")
     private String nombre;
+    @NotNull(message = "El apellido paterno no puede ser nulo o vacio")
+    @NotEmpty
     private String apellidoPaterno;
-    private String apellidoMaterno;
+    @NotNull(message = "El apellido paterno no puede ser nulo o vacio")
+    private String apellidoMaterno;  
     private String numeroControl;
-    private String curp;
-
-  
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellidoPaterno() {
-        return apellidoPaterno;
-    }
-
-    public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno;
-    }
-
-    public String getApellidoMaterno() {
-        return apellidoMaterno;
-    }
-
-    public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
-    }
-
-    public String getNumeroControl() {
-        return numeroControl;
-    }
-
-    public void setNumeroControl(String numeroControl) {
-        this.numeroControl = numeroControl;
-    }
-
-    public String getCurp() {
-        return curp;
-    }
-
-    public void setCurp(String curp) {
-        this.curp = curp;
-    }
-    
-    
-    
+    @NotNull(message = "La CURP no puede ser nulo o vacio")    
+    @Size(min = 16, max = 20) 
+    private String curp;    
 }
+
