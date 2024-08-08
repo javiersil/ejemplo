@@ -2,7 +2,11 @@ package com.backend.curso.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.backend.curso.entities.Alumno;
@@ -12,6 +16,12 @@ import com.backend.curso.models.AlumnoRequestModel;
 import com.backend.curso.models.AlumnoResponseModel;
 import com.backend.curso.repositories.AlumnosRepository;
 
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -53,13 +63,14 @@ public class AlumnosService {
         repository.delete(alumno);
     }
 
-    public List<AlumnoResponseModel> obtenerTodos() {
-        log.info("Obtiene todos");
-        List<AlumnoResponseModel> modelos = new ArrayList();
-        for (Alumno alumno : repository.findAll()) {
-            modelos.add(new AlumnoResponseModel(alumno));
-        }
-        return modelos;
+    public Page<AlumnoResponseModel> obtenerTodos(String numeroControl,
+                                                  String curp,
+                                                  int pagina,
+                                                  int cantidad) {
+        log.info("Obtiene todos" + numeroControl);
+       return repository.findAll(consulta(numeroControl, curp), PageRequest.of(pagina, cantidad))
+       .map(AlumnoResponseModel::new);
+       
     }
 
     public Alumno editar(long id, AlumnoRequestModel model)  {
@@ -78,5 +89,21 @@ public class AlumnosService {
 
     public AlumnoResponseModel editarModel(long id, AlumnoRequestModel model) {
         return new AlumnoResponseModel(editar(id, model));
+    }
+
+
+    private Specification<Alumno> consulta(String numeroControl, String curp) {
+        return (root, query, criteriaBuilder) -> {
+            List<Predicate> predicados = new ArrayList<>();
+            if (numeroControl != null && !numeroControl.equals("")) {
+                predicados.add(criteriaBuilder.or(
+                    criteriaBuilder.equal(root.get("numeroControl"), numeroControl)));
+            }
+            if (curp != null && !curp.equals("")) {
+                predicados.add(criteriaBuilder.or(
+                    criteriaBuilder.equal(root.get("curp"), curp)));
+            }
+            return criteriaBuilder.and(predicados.toArray(new Predicate[0]));
+        };
     }
 }

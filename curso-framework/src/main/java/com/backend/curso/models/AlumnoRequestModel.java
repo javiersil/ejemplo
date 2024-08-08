@@ -18,7 +18,7 @@ public class AlumnoRequestModel {
     private String apellidoMaterno;  
     private String numeroControl;
     @NotNull(message = "La CURP no puede ser nulo o vacio")    
-    @Size(min = 16, max = 20) 
+    @Size(min = 16, max = 20)
     private String curp;    
 }
 

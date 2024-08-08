@@ -43,7 +43,7 @@ public class Alumno implements Serializable {
        this.apellidoPaterno = model.getApellidoPaterno();
        this.apellidoMaterno = model.getApellidoMaterno();
        this.curp = model.getCurp();
-       this.numeroControl = model.getNumeroControl() + "3333";
+       this.numeroControl = model.getNumeroControl();
     }
     
 }
