@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
+
 package com.backend.curso.repositories;
 
 import com.backend.curso.entities.Alumno;
@@ -32,7 +29,7 @@ public interface AlumnosRepository extends JpaRepository<Alumno, Long> {
 
    public Page<Alumno> findAll(Specification<Alumno> filtros, Pageable pagina);
    // public Optional<Alumno> findByCurpNoId(String curp, long id);    
-    public Optional<Alumno> findByCurp(String curp);
+   public Optional<Alumno> findByCurp(String curp);
    //@Query("SELECT a FROM Alumno a  WHERE a.nombre = :nombre")
    public Optional<Alumno> findByNombre(String nombre);
    public List<Alumno> findByNumeroControl(String numeroControl);

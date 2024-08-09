@@ -1,7 +1,7 @@
 
 package com.backend.curso.entities;
 
-import com.backend.curso.models.AlumnoRequestModel;
+import com.backend.curso.models.AlumnoModel;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,34 +16,27 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
-@NoArgsConstructor
-@Getter
 @Setter
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "alumno")
-@SequenceGenerator(name = "alumno_seq", allocationSize = 1 )
-public class Alumno implements Serializable {   
+@SequenceGenerator(name = "alumno_seq", allocationSize = 1)
+public class Alumno extends Persona implements Serializable {
     @Id
-    @Column(name= "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "alumno_seq" )
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "alumno_seq")
     private Long id;
-    @Column(name= "nombre", length=35, nullable = false )
-    private String nombre;
-    @Column(name= "apellido_paterno", length=40, nullable = false )
-    private String apellidoPaterno;
-    @Column(name= "apellido_materno", length=40, nullable = false )
-    private String apellidoMaterno;
-    @Column(name= "numero_control", length=15, nullable = false )
-    private String numeroControl;    
-    @Column(name= "curp", length=20, nullable = false )
-    private String curp;
-      
-    public Alumno(AlumnoRequestModel model) {
-       this.nombre = model.getNombre();
-       this.apellidoPaterno = model.getApellidoPaterno();
-       this.apellidoMaterno = model.getApellidoMaterno();
-       this.curp = model.getCurp();
-       this.numeroControl = model.getNumeroControl();
-    }
+
+    @Column(name = "numero_control", length = 15, nullable = false)
+    private String numeroControl;
     
+
+    public Alumno(AlumnoModel model) {
+        this.setNombre(model.getNombre());
+        this.setApellidoPaterno(model.getApellidoPaterno());
+        this.setApellidoMaterno(model.getApellidoMaterno());
+        this.setCurp(model.getCurp());
+        this.numeroControl = model.getNumeroControl();
+    }
 }
