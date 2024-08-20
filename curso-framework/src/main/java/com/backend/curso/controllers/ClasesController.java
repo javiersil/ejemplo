@@ -40,7 +40,7 @@ public class ClasesController {
 
     @DeleteMapping("/{id}/alumnos/{idAlumno}")
     public ResponseEntity<Void> guardar(@PathVariable("id") long id,
-                                               @PathVariable("idAlumno") long idAlumno) {
+                                        @PathVariable("idAlumno") long idAlumno) {
         service.quitarAlumno(id, idAlumno);
         return ResponseEntity.ok().build();
     }

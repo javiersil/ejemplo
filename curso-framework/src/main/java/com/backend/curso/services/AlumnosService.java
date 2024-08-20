@@ -19,8 +19,10 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 /**
- *
- * @author Marcos
+ * Servicio para el control de alumnos
+ * 
+ * @author Marcos Silva
+ * @since 2024-08-13
  */
 @Log4j2
 @AllArgsConstructor
@@ -28,6 +30,15 @@ import lombok.extern.log4j.Log4j2;
 public class AlumnosService {
     private final AlumnosRepository repository;
 
+    /**
+     * Metodo para obtener un alumno por id
+     * 
+     * @param id Identificador del alumno
+     * @return Entidar de alumno
+     * 
+     * @author Marcos Silva
+     * @since 2024-08-13
+     */
     public Alumno obtenerPorId(long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NoContentException());

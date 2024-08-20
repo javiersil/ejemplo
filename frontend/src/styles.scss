@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+
+.contenido-centrado {
+    display: flex;
+    justify-content: center;
+}
+
+.contenido-al-final {
+    display: flex;
+    justify-content: end;
+}
