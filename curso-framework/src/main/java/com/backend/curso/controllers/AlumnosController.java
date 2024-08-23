@@ -30,7 +30,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/alumnos")
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "Requestor-Type", exposedHeaders = "X-Get-Header")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AlumnosController {
   private final AlumnosService service;
 

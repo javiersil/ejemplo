@@ -1,0 +1,55 @@
+
+<ngb-alert type="danger" (closed)="this.AlertClosed = false">{{ message }}</ngb-alert>
+
+<div class="row">
+    <form class="col-12" (submit)="guardar()"  [formGroup]="alumnoFormulario">
+
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control-sm" id="nombre" placeholder="Nombre"  formControlName="nombre" >
+
+            <div *ngIf="alumnoFormulario.get('nombre')?.touched && alumnoFormulario.get('nombre')?.invalid">
+                <div class="text-bg-danger" *ngIf="alumnoFormulario.get('nombre')?.errors?.['required']" > El nombre es requerido </div>
+            </div>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="apellidoPaterno" class="form-label">Apellido paterno</label>
+            <input type="text" class="form-control-sm" id="apellidoPaterno" placeholder="apellido paterno" formControlName="apellidoPaterno">
+        </div>
+
+        <div class="mb-3">
+            <label for="apellidoMaterno" class="form-label">Apellido materno</label>
+            <input type="text" class="form-control-sm" id="apellidoMaterno" placeholder="apellido materno" formControlName="apellidoMaterno">
+        </div>
+
+        <div class="mb-3">
+            <label for="curp" class="form-label">Curp</label>
+            <input type="text" class="form-control-sm" id="curp" placeholder="CURP" formControlName="curp">
+
+            <div *ngIf="alumnoFormulario.get('curp')?.touched && alumnoFormulario.get('curp')?.invalid">
+                <div class="text-bg-danger" *ngIf="alumnoFormulario.get('curp')?.errors?.['required']" > La curp es requerida </div>
+                <div class="text-bg-danger" *ngIf="alumnoFormulario.get('curp')?.errors?.['minlength']" >La curp debe ser maximo de: 
+                    {{alumnoFormulario.get('curp')?.errors?.['minlength']?.['requiredLength']}} </div>
+                    <div class="text-bg-danger" *ngIf="alumnoFormulario.get('curp')?.errors?.['maxlength']" >La curp debe ser maximo de: 
+                        {{alumnoFormulario.get('curp')?.errors?.['maxlength']?.['requiredLength']}} </div>
+            </div>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="numeroControl" class="form-label">Numero de control</label>
+            <input type="text" class="form-control-sm" id="numeroControl" placeholder="Numero de control" formControlName="numeroControl">
+        </div>
+
+        <div *ngIf="alumnoFormulario.get('numeroControl')?.touched && alumnoFormulario.get('numeroControl')?.invalid">
+            <div class="text-bg-danger" *ngIf="alumnoFormulario.get('numeroControl')?.errors?.['formato']" >
+               {{alumnoFormulario.get('numeroControl')?.errors?.['formato']}}    
+            </div>
+        </div>
+
+        
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>

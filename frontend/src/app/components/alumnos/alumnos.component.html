@@ -1,43 +1,43 @@
 <div class="row justify-content-between">
-    <div class="col-sm-12 col-md-6 col-lg-4">
-        Alumnos
-    </div>
-    <div class="col-3 contenido-al-final ">
-        <button type="button" class="btn btn-primary">Nuevo</button>
-    </div>
+  <div class="col-sm-12 col-md-6 col-lg-4">
+    Alumnos
+  </div>
+  <div class="col-3 contenido-al-final ">
+    <button type="button" class="btn btn-primary"  *ngIf="formulario === false" (click)="nuevoAlumno()" >Nuevo</button>
+    <button type="button" class="btn btn-secondary"  *ngIf="formulario"  (click)="formulario = false" >Cancelar</button>
+  </div>
 </div>
 
-
-<div class="row">
-    <div class="col-12">
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Numero de control</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido paterno</th>
-                <th scope="col">Apellido materno</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr  *ngFor="let alumno of alumnos">
-                <th scope="row">{{alumno.numeroControl}}</th>
-                <td>{{alumno.nombre}}</td>
-                <td>{{alumno.apellidoPaterno}}</td>
-                <td>{{alumno.apellidoMaterno}}</td>
-              </tr>
-            </tbody>
-          </table>
-    </div>
-    <div class="row justify-content-center">
-    <div class="col contenido-centrado">        
-        <ngb-pagination [(page)]="page"
-        [pageSize]="pageSize"
-        [collectionSize]="cantidad"
-        (pageChange)="paginar($event)" />
-    </div>
-</div>
+<div *ngIf="formulario">
+   <app-alumno-formulario></app-alumno-formulario>
 </div>
 
+<div class="row"  *ngIf="formulario === false">
+  <div class="col-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Numero de control</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido paterno</th>
+          <th scope="col">Apellido materno</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let alumno of alumnos">
+          <th scope="row">{{alumno.numeroControl}}</th>
+          <td>{{alumno.nombre}}</td>
+          <td>{{alumno.apellidoPaterno}}</td>
+          <td>{{alumno.apellidoMaterno}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 
+  <div class="row justify-content-center"  *ngIf="formulario === false">
+    <div class="col contenido-centrado">
+      <ngb-pagination [page]="page" [pageSize]="pageSize" [collectionSize]="cantidad" (pageChange)="paginar($event)" />
+    </div>
+  </div>
+</div>

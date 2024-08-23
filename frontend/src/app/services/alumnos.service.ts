@@ -9,8 +9,11 @@ export class AlumnosService {
 
   constructor(private httpClient: HttpClient) { }
 
-  obtenerAlumnos(pagina: number, cantidad: number): Observable<any> {
+  obtener(pagina: number, cantidad: number): Observable<any> {
     return this.httpClient.get('http://localhost:9090/alumnos?cantidad=' + cantidad + '&pagina=' + pagina);
   }
 
+  guardar(alumno: any): Observable<any> {
+    return this.httpClient.post('http://localhost:9090/alumnos', alumno);
+  }
 }
